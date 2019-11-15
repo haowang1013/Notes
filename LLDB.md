@@ -1,0 +1,34 @@
+# Here's a collection of handy lldb commands in the XCode debugger
+
+## Manually symbolicate an address:
+```
+image lookup --address {address}
+```
+
+## Print callstack of the current thread:
+```
+thread backtrace
+```
+
+## List all the threads:
+```
+thread list
+```
+
+## Print the value of a variable:
+```
+p {variable}
+```
+
+## Print array elements:
+```
+parray {count} {array variable}
+
+UE4 example: 
+parray 100 (float*)FloatValues.AllocatorInstance.Data
+```
+
+## Set a data breakpoint:
+```
+w s e -- {address}
+```
