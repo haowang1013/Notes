@@ -53,8 +53,7 @@ adb pull /sdcard/screencap.png
 
 - Launch an application
 ```
-adb shell am start -n 
-com.yourcompany.yourproject/com.epicgames.ue4.GameActivity
+adb shell am start -n com.yourcompany.yourproject/com.epicgames.ue4.GameActivity
 ```
 
 - Realtime logging
