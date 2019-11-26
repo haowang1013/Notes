@@ -19,6 +19,18 @@ bFasterWithoutUnity = true;
 bUseLoggingInShipping = true;
 ```
 
+# Running
+
+- To execute console command during startup, use:
+```
+<YOUR GAME>.exe -ExecCmds="<COMMAND 1>;<COMMAND 2>;<COMMAND 3>"
+```
+
+You can also use this method to override CVars via the command line:
+```
+<YOUR GAME>.exe -ExecCmds="<CVAR 1> <VALUE 1>;<CVAR 2> <VALUE 2>"
+```
+
 # Packaging
 
 - Additional cmd line param can be added to the packaged build via the RunUAT script:
