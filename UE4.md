@@ -85,3 +85,14 @@ adb logcat
 dg.EnableObjectCookingStats=1
 dg.MinObjectSizeForCookingStats=X
 ```
+
+# Debugging
+
+- To launch a macOS cooked build from Xcode, set the executable to
+```
+PackagedGame/<PLATFORM>/<GAME>.app/Contents/MacOS/<GAME>
+```
+And set the working directory to
+```
+PackagedGame/<PLATFORM>/<GAME>.app/Contents/MacOS
+```
