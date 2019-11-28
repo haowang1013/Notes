@@ -96,3 +96,6 @@ And set the working directory to
 ```
 PackagedGame/<PLATFORM>/<GAME>.app/Contents/MacOS
 ```
+
+- To block the UE4 process until the debugger is attached, set `-WaitForDebugger` in the cmd line
+
