@@ -19,6 +19,15 @@ bFasterWithoutUnity = true;
 bUseLoggingInShipping = true;
 ```
 
+- Conditional compilation based on engine version:
+```
+In C++:
+Use ENGINE_MAJOR_VERSION, ENGINE_MINOR_VERSION, ENGINE_PATCH_VERSION defined in Version.h
+
+In C#:
+Use UE_4_X_OR_LATER macro, such as UE_4_17_OR_LATER
+```
+
 # Running
 
 - To execute console command during startup, use:
