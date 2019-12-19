@@ -108,3 +108,21 @@ PackagedGame/<PLATFORM>/<GAME>.app/Contents/MacOS
 
 - To block the UE4 process until the debugger is attached, set `-WaitForDebugger` in the cmd line
 
+# Console Variables
+
+- Several ways to define a console variable (cvar) in UE4:
+```
+static int32 GFoo = 1;
+static FAutoConsoleVariableRef CVarFoo(
+	TEXT("<NAME>"),
+	GFoo,
+	TEXT("<DESCRIPTION>")
+	);
+
+
+static TAutoConsoleVariable<int32> CVarFoo(
+	TEXT("<NAME>"),
+	<DEFAULT VALUE>,
+	TEXT("<DESCRIPTION>"),
+	ECVF_ReadOnly);
+```
