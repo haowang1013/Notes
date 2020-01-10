@@ -1,5 +1,7 @@
 # Here's a collection of handy lldb commands in the XCode debugger
 
+Also, see the cheat sheet here: https://www.nesono.com/sites/default/files/lldb%20cheat%20sheet.pdf
+
 ## Manually symbolicate an address:
 ```
 image lookup --address {address}
