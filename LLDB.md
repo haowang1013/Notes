@@ -19,18 +19,25 @@ thread list
 
 ## Print the value of a variable:
 ```
-p {variable}
+p <variable>
 ```
 
 ## Print array elements:
 ```
-parray {count} {array variable}
+parray <count> <array variable>
 
 UE4 example: 
 parray 100 (float*)FloatValues.AllocatorInstance.Data
 ```
 
-## Set a data breakpoint:
+## Watchpoint:
 ```
-w s e -- {address}
+To set a watch point on memory address:
+w s e -- <address>
+
+To list all the watchpoint:
+watchpoint list
+
+To delete a watchpoint:
+watchpoint delete <ID>
 ```
