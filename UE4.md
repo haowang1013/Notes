@@ -108,6 +108,11 @@ PackagedGame/<PLATFORM>/<GAME>.app/Contents/MacOS
 
 - To block the UE4 process until the debugger is attached, set `-WaitForDebugger` in the cmd line
 
+- To enable debug view modes in cooked build, set the following in ConsoleVariables.ini:
+```
+r.ForceDebugViewModes=1
+```
+
 # Console Variables
 
 - Several ways to define a console variable (cvar) in UE4:
