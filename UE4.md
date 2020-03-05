@@ -131,6 +131,18 @@ static TAutoConsoleVariable<int32> CVarFoo(
 	<DEFAULT VALUE>,
 	TEXT("<DESCRIPTION>"),
 	ECVF_ReadOnly);
+	
+	
+static void CommandImplementation(UWorld* InWorld)
+{
+  ...
+}
+
+FAutoConsoleCommandWithWorld Command(
+	<NAME>,
+	<DESCRIPTION>,
+	FConsoleCommandWithWorldDelegate::CreateStatic(&CommandImplementation)
+);	
 ```
 
 # PSO Caching
