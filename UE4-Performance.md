@@ -68,9 +68,13 @@ Each primitive component has a **Detail Mode** property which can be used to hid
 
 Set the detail mode for the current platform.
 
-## Feature Level Switch
+## Material
 
-Use the **Feature Level Switch** node in the material to create different quality/cost code path for different platforms.
+Use the **Feature Level Switch** or **Quality Switch** node in the material to create different quality/cost code path for different platforms.
+
+* `r.MaterialQualityLevel`
+
+Set the material quality level for the current platform, 0: low, 1: high, 2: medium.
 
 # Content Optimization
 
