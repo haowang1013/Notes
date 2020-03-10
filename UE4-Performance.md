@@ -80,6 +80,8 @@ HLOD is great for creating proxy mesh for a group of meshes that need to be seen
 
 Smaller detailed objects should be excluded from HLOD as they don't contribute to the look meaningfully. This also means they need to have proper max draw distance set (see above), otherwise they'll be rendered all the time!
 
+ - To verify HLOD is working in the game, run **show hlodcoloration**
+
 ## Texture Mips
 
 Most of the textures should have the mips generated, with exception for the ones used by UI. Make sure the textures use the mip-gen setting from its texture group.
@@ -107,3 +109,5 @@ StaticMeshDefaultNumOfLODLevelsToCastShadow=2
 SkeletalMeshMinVertices=200
 SkeletalMeshNumRequiredLODs=3
 ```
+
+- To verify LOD is working in the game, run **show lodcoloration**
