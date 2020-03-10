@@ -82,6 +82,10 @@ Smaller detailed objects should be excluded from HLOD as they don't contribute t
 
  - To verify HLOD is working in the game, run **show hlodcoloration**
 
+ - To enable/disable HLOD, run **r.hlod 1/0**
+
+ - To force HLOD level, run **r.hlod force <LEVEL>**
+
 ## Texture Mips
 
 Most of the textures should have the mips generated, with exception for the ones used by UI. Make sure the textures use the mip-gen setting from its texture group.
