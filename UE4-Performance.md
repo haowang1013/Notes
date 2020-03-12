@@ -12,6 +12,12 @@ Controls the resolution scaling of the 3D rendering buffer, this won't affect UI
 
 100 means no scaling, otherwise there will be a upscale pass before the UI is rendered, which can be several ms on the mobile devices.
 
+## Light
+
+* `r.LightMaxDrawDistanceScale`
+
+* `r.MinScreenRadiusForLights`
+
 ## Shadow
 
 * `r.Shadow.MaxCSMResolution`
