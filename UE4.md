@@ -190,3 +190,15 @@ Intermediate
 6. Copy the generated file to `Build/<PLATFORM>/PipelineCaches`, then recook.
 
 7. Repeat step #2 - #6 when the assets change in the project
+
+# Network Debugging and Testing
+
+- Use **stat net** to display networking related stats in the engine
+
+- To simulate bad network condition (see FPacketSimulationSettings::ParseSettings):
+```
+net PktEmulationProfile=<Off|Average|Bad>; see BaseEngine.ini
+net PktLoss=<NUMBER>
+net PktLag=<NUMBER>
+net PktLagVariance=<NUMBER>
+```
