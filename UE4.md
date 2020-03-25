@@ -28,6 +28,12 @@ In C#:
 Use UE_4_X_OR_LATER macro, such as UE_4_17_OR_LATER
 ```
 
+- Use private engine headers:
+```
+string EnginePath = Path.GetFullPath(Target.RelativeEnginePath);
+PrivateIncludePaths.Add(Path.Combine(EnginePath, "Source/Runtime/OpenGLDrv/Private"));
+```
+
 # Running
 
 - To execute console command during startup, use:
