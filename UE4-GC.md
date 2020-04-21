@@ -160,7 +160,9 @@ void ProcessObjectArray(FGCArrayStruct& InObjectsToSerializeStruct, const FGraph
 
 - Process each token from the object class' ReferenceTokenStream
 
-  1. Call HandleTokenStreamObjectReference
+  1. Call HandleTokenStreamObjectReference. 
+
+     This function does 2 things: Nulling out references of pending kill objects and adding referenced objects to the serialize list.
 
   2. Spawn new task to process NewObjectsToSerialize if needed
 
