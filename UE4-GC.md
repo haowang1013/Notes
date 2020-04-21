@@ -164,7 +164,9 @@ void ProcessObjectArray(FGCArrayStruct& InObjectsToSerializeStruct, const FGraph
 
      Nulling out references of pending kill objects and adding referenced objects to the serialize list.
 
-  2. Spawn new task to process NewObjectsToSerialize if needed
+  2. Note that for TMap and TSet properties, the entire property is serialized with a special archive (**FSimpleObjectReferenceCollectorArchive**) to gather the object references.
+
+  3. Spawn new task to process NewObjectsToSerialize if needed
 
 - Spawn new task to process NewObjectsToSerialize if needed
 
