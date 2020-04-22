@@ -191,3 +191,13 @@ while(1)
 	}
 }
 ```
+
+Or
+
+```
+AsyncTask(ENamedThreads::GameThread, []()
+{
+	// Do work here
+	// This will be called by the task graph
+});
+```
