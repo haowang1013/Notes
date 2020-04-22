@@ -78,12 +78,50 @@ See TGraphTask::SetupPrereqs and TGraphTask::PrerequisitesComplete
 
 # Task Creation
 
-Some examples:
+Lambda function task:
 
 ```
-// Lambda function task
 auto Task = FFunctionGraphTask::CreateAndDispatchWhenReady([]()
 {
 	// Do stuff
 }, {}, nullptr);
+```
+
+Custom task class with sub tasks:
+```
+class FMyTaskGraphTask
+{
+public:
+	FMyTaskGraphTask(int32 InLeve, FString InMessage) : Level(InLeve), Message(InMessage)
+	{}
+
+	FORCEINLINE TStatId GetStatId() const
+	{
+		RETURN_QUICK_DECLARE_CYCLE_STAT(FMyTaskGraphTask, STATGROUP_TaskGraphTasks);
+	}
+
+	ENamedThreads::Type GetDesiredThread() { return ENamedThreads::AnyThread; }
+
+	static ESubsequentsMode::Type GetSubsequentsMode() { return ESubsequentsMode::TrackSubsequents; }
+
+	void DoTask(ENamedThreads::Type CurrentThread, const FGraphEventRef& MyCompletionGraphEvent)
+	{
+		UE_LOG(LogTemp, Log, TEXT("%s"), *Message);
+		if (Level < 10)
+		{
+			FString NewMessage = Message + TEXT(" Child");
+			// Add a sub task which must complete until the current task is considered completed
+			MyCompletionGraphEvent->DontCompleteUntil(TGraphTask<FMyTaskGraphTask>::CreateTask(NULL, CurrentThread).ConstructAndDispatchWhenReady(Level + 1, NewMessage));
+		}		
+	}
+
+private:
+	int32 Level;
+	FString Message;
+};
+
+// Create the main task and wait for its completion
+auto Task = TGraphTask<FMyTaskGraphTask>::CreateTask(nullptr).ConstructAndDispatchWhenReady(0, TEXT("Main Task"));
+FTaskGraphInterface::Get().WaitUntilTasksComplete({ Task });
+UE_LOG(LogTemp, Log, TEXT("All Finished!"));
 ```
