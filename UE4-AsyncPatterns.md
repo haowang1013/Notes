@@ -1,4 +1,42 @@
 
+# Synchronization Primitives
+
+## FEvent
+```
+// Thread A
+SyncEvent = FGenericPlatformProcess::GetSynchEventFromPool();
+...
+SyncEvent->Trigger();
+
+// Thread B
+if (SyncEvent->Wait(Time))
+{
+	// Event is triggered
+}
+else
+{
+	// The wait times out
+}
+```
+
+## FCriticalSection
+
+```
+FCriticalSection CS;
+{
+	FScopeLock Lock(&CS);
+	// Do stuff with a shared data structure that can be accessed in multiple threads
+}
+```
+
+## TAtomic
+
+## FThreadSafeBool and FThreadSafeCounter
+
+## Others
+
+See LockFreeList.h
+
 # FRunnable and FRunnableThread
 
 Best for recursive work that runs for a long time.
