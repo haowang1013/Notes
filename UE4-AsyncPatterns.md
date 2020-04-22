@@ -1,5 +1,8 @@
 
 # FRunnable and FRunnableThread
+
+Best for recursive work that runs for a long time.
+
 ```
 class FMyRunnable : public FRunnable
 {
@@ -40,6 +43,9 @@ Notes:
 
 
 # IQueuedWork and FQueuedThreadPool
+
+Best for the producer-consumer pattern with no dependency between the work.
+
 ```
 class FMyQueuedWork : public IQueuedWork
 {
@@ -86,6 +92,9 @@ Notes:
 
 
 # FAutoDeleteAsyncTask
+
+Best for one-off tasks.
+
 ```
 class FMyTask : public FNonAbandonableTask
 {
@@ -156,3 +165,29 @@ Task->WaitCompletionWithTimeout(1.f);
 
 Notes:
 - The task must be deleted by the user code when finished/cancelled.
+
+# Async Functions
+
+Best for one-off stuff.
+
+```
+FString Data = ...;	
+TFuture<int> Result = Async(EAsyncExecution::TaskGraph|TaskGraphMainThread|Thread|ThreadPool, [Data]()
+{
+	// Do some work with "Data"
+	return 123;
+});
+
+...
+
+// Wait for the result
+while(1)
+{
+	if (Result.IsReady())
+	{
+		// Note that Get() will block until the result is ready!
+		auto Number = Result.Get();
+		...
+	}
+}
+```
