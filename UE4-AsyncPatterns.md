@@ -38,6 +38,7 @@ delete Runnable;
 Notes:
 - The user code must delete the runnable instances.
 
+
 # IQueuedWork and FQueuedThreadPool
 ```
 class FMyQueuedWork : public IQueuedWork
@@ -82,3 +83,76 @@ Notes:
   - Waits for all the started work to finish.
 
 - The queued work should delete itself when finished or abandoned since the system doesn't do it for you.
+
+
+# FAutoDeleteAsyncTask
+```
+class FMyTask : public FNonAbandonableTask
+{
+public:
+	FMyTask(const FString& InData) : Data(InData)
+	{}
+
+	void DoWork()
+	{
+		UE_LOG(LogTemp, Log, TEXT("%s"), *Data);
+	}
+
+	FORCEINLINE TStatId GetStatId() const
+	{
+		RETURN_QUICK_DECLARE_CYCLE_STAT(FMyTask, STATGROUP_ThreadPoolAsyncTasks);
+	}
+
+private:
+	FString Data;
+};
+
+// Create and dispatch the task
+auto Task = new FAutoDeleteAsyncTask<FMyTask>("This is an auto-delete task!");
+Task->StartBackgroundTask();
+```
+
+# FAsyncTask
+```
+class FMyTask : public FNonAbandonableTask
+{
+public:
+	FMyTask(const FString& InData) : Data(InData)
+	{}
+
+	void DoWork()
+	{
+		UE_LOG(LogTemp, Log, TEXT("%s"), *Data);
+	}
+
+	FORCEINLINE TStatId GetStatId() const
+	{
+		RETURN_QUICK_DECLARE_CYCLE_STAT(FMyTask, STATGROUP_ThreadPoolAsyncTasks);
+	}
+
+private:
+	FString Data;
+};
+
+// Create and dispatch the task
+auto Task = new FAsyncTask<FMyTask>("This is an auto-delete task!");
+Task->StartBackgroundTask();
+
+// Check if the work is done
+Task->IsWorkDone();
+
+// Cancel the task
+if (Task->Cancel())
+{
+	delete Task;
+}
+
+// Make sure the task is completed
+Task->EnsureCompletion(true);
+
+// Wait for completion with a timeout
+Task->WaitCompletionWithTimeout(1.f);
+```
+
+Notes:
+- The task must be deleted by the user code when finished/cancelled.
