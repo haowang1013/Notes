@@ -1,3 +1,78 @@
+# FTaskGraphImplementation
+
+- FTaskGraphInterface is implemented by FTaskGraphImplementation
+```
+class FTaskGraphImplementation : public FTaskGraphInterface
+{
+	// per-thread data for all the threads, including the named and unnamed threads
+	FWorkerThread		WorkerThreads[MAX_THREADS];
+
+	// per-priority task queue for the unnamed threads (MAX_THREAD_PRIORITIES is 3)
+	FStallingTaskQueue<FBaseGraphTask, PLATFORM_CACHE_LINE_SIZE, 2>	IncomingAnyThreadTasks[MAX_THREAD_PRIORITIES];
+}
+```
+
+- FWorkerThread
+```
+struct FWorkerThread
+{
+	/** The actual FTaskThread that manager this task **/
+	FTaskThreadBase*	TaskGraphWorker;
+	
+	/** For internal threads, the is non-NULL and holds the information about the runable thread that was created. **/
+	FRunnableThread*	RunnableThread;
+}
+```
+
+- FNamedTaskThread
+```
+class FNamedTaskThread : public FTaskThreadBase
+{
+	/** Grouping of the data for an individual queue. **/
+	struct FThreadTaskQueue
+	{
+		FStallingTaskQueue<FBaseGraphTask, PLATFORM_CACHE_LINE_SIZE, 2> StallQueue;
+
+		/** We need to disallow reentry of the processing loop **/
+		uint32 RecursionGuard;
+
+		/** Indicates we executed a return task, so break out of the processing loop. **/
+		bool QuitForReturn;
+
+		/** Indicates we executed a return task, so break out of the processing loop. **/
+		bool QuitForShutdown;
+
+		/** Event that this thread blocks on when it runs out of work. **/
+		FEvent*	StallRestartEvent;
+	};
+
+	// NumQueues is 2
+	FThreadTaskQueue Queues[ENamedThreads::NumQueues];
+}
+```
+
+- FTaskThreadAnyThread
+```
+class FTaskThreadAnyThread : public FTaskThreadBase
+{
+	/** Grouping of the data for an individual queue. **/
+	struct FThreadTaskQueue
+	{
+		/** Event that this thread blocks on when it runs out of work. **/
+		FEvent* StallRestartEvent;
+		/** We need to disallow reentry of the processing loop **/
+		uint32 RecursionGuard;
+		/** Indicates we executed a return task, so break out of the processing loop. **/
+		bool QuitForShutdown;
+		/** Should we stall for tuning? **/
+		bool bStallForTuning;
+		FCriticalSection StallForTuning;
+	};
+
+	FThreadTaskQueue Queue;
+}
+```
+
 # Init
 ```
 int32 FEngineLoop::PreInitPreStartupScreen(const TCHAR* CmdLine)
@@ -124,4 +199,39 @@ private:
 auto Task = TGraphTask<FMyTaskGraphTask>::CreateTask(nullptr).ConstructAndDispatchWhenReady(0, TEXT("Main Task"));
 FTaskGraphInterface::Get().WaitUntilTasksComplete({ Task });
 UE_LOG(LogTemp, Log, TEXT("All Finished!"));
+```
+
+# Task Dispatching
+
+- ConstructAndDispatchWhenReady is called the construct the actual task object and try to dispatch it
+
+- It calls TGraphTask::Setup, which calls SetupPrereqs
+
+- SetupPrereqs goes through all the Prerequisites that the task depends on, try to add the task itself as a subsequent by calling "AddSubsequent"
+
+- If AddSubsequent fails, it means the particular prerequisite is already finished, and "AlreadyCompletedPrerequisites" increments
+
+- Then "PrerequisitesComplete" is called, which checks if all the prerequisites are completed, in which case "QueueTask" is called
+
+```
+virtual void QueueTask(FBaseGraphTask* Task, ENamedThreads::Type ThreadToExecuteOn, ENamedThreads::Type InCurrentThreadIfKnown = ENamedThreads::AnyThread) final override
+{
+	if (ThreadToExecuteOn is AnyThread)
+	{
+		if (multi-threading is supported)
+		{
+			Figure out task the thread priority
+			Push the task to a per-thread-priority entry in "IncomingAnyThreadTasks"
+			Call "StartTaskThread" to wake up the thread if possible
+		}
+		else
+		{
+			set ThreadToExecuteOn to GameThread
+		}
+	}
+
+	Figure out the current thread
+
+	Get the FTaskThreadBase instance based on ThreadToExecuteOn, call EnqueueFromThisThread or EnqueueFromOtherThread
+}
 ```
