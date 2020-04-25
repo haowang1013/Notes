@@ -128,6 +128,70 @@ Notes:
 
 - The queued work should delete itself when finished or abandoned since the system doesn't do it for you.
 
+# IQueuedWork and FQueuedThreadPool Internals
+
+- FQueuedThreadPool is implemented by FQueuedThreadPoolBase
+```
+/**
+ * Implementation of a queued thread pool.
+ */
+class FQueuedThreadPoolBase : public FQueuedThreadPool
+{
+protected:
+
+	/** The work queue to pull from. */
+	TArray<IQueuedWork*> QueuedWork;
+	
+	/** The thread pool to dole work out to. */
+	TArray<FQueuedThread*> QueuedThreads;
+
+	/** All threads in the pool. */
+	TArray<FQueuedThread*> AllThreads;
+
+	/** The synchronization object used to protect access to the queued work. */
+	FCriticalSection* SynchQueue;
+
+	/** If true, indicates the destruction process has taken place. */
+	bool TimeToDie;
+```
+
+- When work is added to the thread pool, the thread pool checks if there're free thread available
+
+  - If not, the work is added to the "QueuedWork" array
+
+  - If a thread is available, it's popped from the end of the "QueuedThreads" array and the work is added to the thread by calling "DoWork"
+
+
+- The "threads" in the thread pool is implemented by FQueuedThread
+```
+class FQueuedThread
+	: public FRunnable
+{
+protected:
+
+	/** The event that tells the thread there is work to do. */
+	FEvent* DoWorkEvent;
+
+	/** If true, the thread should exit. */
+	TAtomic<bool> TimeToDie;
+
+	/** The work this thread is doing. */
+	IQueuedWork* volatile QueuedWork;
+
+	/** The pool this thread belongs to. */
+	class FQueuedThreadPool* OwningThreadPool;
+
+	/** My Thread  */
+	FRunnableThread* Thread;
+```
+
+- In the thread loop, FQueuedThread:
+
+  - Wait for the "DoWorkEvent"
+
+  - Do the work via calling "DoThreadedWork"
+
+  - Then return itself to the pool by calling "ReturnToPoolOrGetNextJob"
 
 # FAutoDeleteAsyncTask
 
