@@ -1,3 +1,5 @@
+![TG Diagram](/UML/TaskGraph.png)
+
 # Task Graph Interface
 
 - The global TG (task graph) system is exposed by a **FTaskGraphInterface** singleton, which can be accessed via FTaskGraphInterface::Get()
