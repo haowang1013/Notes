@@ -16,11 +16,45 @@ class FPrimitiveSceneInfo
 }
 ```
 
+# Draw Call Merging
+
+- FMeshDrawCommand is considered mergable if FMeshDrawCommand::MatchesForDynamicInstancing return true.
+
+- When static primitive is added to the scene, their draw command is divided into "state bucket" based on the mergability against the existing ones
+
+  See FScene::CachedMeshDrawCommandStateBuckets and FCachedPassMeshDrawListContext::FinalizeCommand
+
+- If a command is merged, FCachedMeshDrawCommandInfo::StateBucketId will have a valid Id
+
+- When collecting visible draw command for the frame, a valid StateBucketId ensures that the same FMeshDrawCommand pointer is returned for different FCachedMeshDrawCommandInfo that are batched
+  
+  See FDrawCommandRelevancePacket::AddCommandsForMesh
+
+- Before rendering the pass, all the visible mesh commands are sent to FMeshDrawCommandPassSetupTask, as FMeshDrawCommandPassSetupTaskContext::MeshDrawCommands
+
+  Note that by default the mesh command list contain duplicated FMeshDrawCommand* for entries that can be merged.
+
+  The final merging happens in BuildMeshDrawCommandPrimitiveIdBuffer.
+
+
 # FScene
 ```
 class FScene : public FSceneInterface
 {
 	FCachedPassMeshDrawList CachedDrawLists[EMeshPass::Num];
+
+	/** Instancing state buckets.  These are stored on the scene as they are precomputed at FPrimitiveSceneInfo::AddToScene time. */
+	TSet<FMeshDrawCommandStateBucket, MeshDrawCommandKeyFuncs> CachedMeshDrawCommandStateBuckets;
+}
+```
+
+# FViewCommands
+```
+class FViewCommands
+{
+	TStaticArray<FMeshCommandOneFrameArray, EMeshPass::Num> MeshCommands;
+	TStaticArray<int32, EMeshPass::Num> NumDynamicMeshCommandBuildRequestElements;
+	TStaticArray<TArray<const FStaticMeshBatch*, SceneRenderingAllocator>, EMeshPass::Num> DynamicMeshCommandBuildRequests;
 }
 ```
 
