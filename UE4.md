@@ -160,6 +160,10 @@ DefaultEngine.ini:
 r.ShaderPipelineCache.Enabled=1
 r.ShaderPipelineCache.SaveUserCache=1
 
+[DevOptions.Shaders]
+; Required for enabling PSO
+NeedsShaderStableKeys=true
+
 DefaultGame.ini:
 [/Script/UnrealEd.ProjectPackagingSettings]
 bShareMaterialShaderCode=True
