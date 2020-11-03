@@ -20,6 +20,10 @@ See FTraceAuxiliary::Initialize
 
   Set a local file name to which the trace data is stored
   
+- -statnamedevents
+
+  Enable stats based events
+  
 # INI Options
 
 In BaseEngine.ini/DefaultEngine.ini
