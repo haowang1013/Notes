@@ -22,7 +22,7 @@ See FTraceAuxiliary::Initialize
   
 - -statnamedevents
 
-  Enable stats based events
+  Enable stats based events, can also be toggled with console command **stat NamedEvents**
   
 # INI Options
 
