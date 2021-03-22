@@ -44,3 +44,5 @@ Alternatively presets can be enabled via "-trace={PRESET NAME}"
 - Trace.Start {channel,preset...}
 
 - Trace.Stop
+
+- Trace.Connect {host IP running UnrealInsights.exe}
