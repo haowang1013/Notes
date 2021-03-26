@@ -25,6 +25,13 @@ DECLARE_CYCLE_STAT(TEXT("My Stat"), STAT_MyStat, STATGROUP_MyGrop);
 }
 ```
 
+- Unreal Insights Event Scope
+```
+{
+  TRACE_CPUPROFILER_EVENT_SCOPE(ScopeName);
+  // Some code uses cpu cycles...
+}
+```
 
 # Unreal Insights
 - See [UE4-Insights.md](UE4-Insights.md)
