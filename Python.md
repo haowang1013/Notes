@@ -192,5 +192,79 @@ print("The last name is {}".format(names[len(names) - 1]))
 ```
 
 # list
+多个元素的集合, 可以任意添加, 删除元素.元素可以被修改.
+
+- 初始化
+```
+scores = [70, 100, 90, 30]
+print(scores)
+>>> [70, 100, 90, 30]
+
+# 获取长度
+num_scores = len(scores)
+print("I have {} scores".format(num_scores))
+>>> I have 4 scores
+
+# 获取第一个元素
+print("The first score is {}".format(scores[0]))
+>>> The first score is 70
+
+# 获取最后一个元素（长度减一作为下标）
+print("The last score is {}".format(scores[len(scores) - 1]))
+>>> The last score is 30
+```
+
+- 遍历
+```
+scores = [70, 100, 90, 30]
+for score in scores:
+  print(score)
+>>> 70
+>>> 100
+>>> 90
+>>> 30
+```
+
+- 添加删除
+```
+# 末尾添加
+scores = [70, 100, 90, 30]
+scores.append(59)
+print(scores)
+>>> [70, 100, 90, 30, 59]
+
+# 中间插入
+scores.insert(1, 200)
+print(scores)
+>>> [70, 200, 100, 90, 30, 59]
+
+# 删除元素
+scores.pop(1)
+>>> 200
+print(scores)
+>>> [70, 100, 90, 30, 59]
+```
+
+- 修改元素
+```
+scores = [70, 100, 90, 30]
+scores[1] = 129
+print(scores)
+>>> [70, 129, 90, 30]
+```
+- 排序和反转
+```
+# 反转
+scores = [70, 100, 90, 30]
+scores.reverse()
+print(scores)
+>>> [30, 90, 100, 70]
+
+# 排序（从小到大）
+scores.sort()
+print(scores)
+>>> [30, 70, 90, 100]
+```
+
 # 字典
 # 函数
