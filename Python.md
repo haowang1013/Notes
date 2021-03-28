@@ -102,9 +102,95 @@ c = ("A", "B", "C")
 print(c)
 >>> ("A", "B", "C")
 ```
+
 # 条件语句
+- 条件分支
+```
+score = int(input("What's your score?\n"))
+if score >= 90:
+  print("You're awesome!")
+elif score >= 60:
+  print("You need to work harder")
+else:
+  print("You suck...")
+```
+
+- 条件组合
+```
+color = "red"
+size = 100
+if color === "red" and size >= 90:
+  print("它又大又红")
+  
+if color == "red" or size > 90:
+  print("它要么大要么红")
+  
+if color != "red" and size >= 90:
+  print("它很大, 但不是红色的")
+  
+if color != "red" or size < 90:
+  print("它要么不大, 要么不红")
+```
+
 # 循环
+- 循环固定次数
+```
+for a in range(5):
+  print(a)
+>>> 0
+>>> 1
+>>> 2
+>>> 3
+>>> 4
+```
+
+- 从最小数开始循环
+```
+for a in range(5, 10):
+  print(a)
+>>> 5
+>>> 6
+>>> 7
+>>> 8
+>>> 9
+```
+
+- 中断循环
+```
+names = ["mimi", "didi", "lili", "xixi", "coco", "dodo", "lolo"]
+for name in names:
+  if name == "coco":
+    print("coco is found!")
+    break
+```
+
 # tuple
+只能保存固定数量的元素, 元素被初始化后不能修改.不能添加或者删除元素.
+```
+# 初始化tuple
+names = ("mimi", "didi", "lili")
+
+# 获取长度
+num_names = len(names)
+print("I have {} names".format(num_names))
+>>> I have 3 names
+
+# 遍历元素
+for name in names:
+  print(name)
+>>> mimi
+>>> didi
+>>> lili
+
+# 获取第一个元素
+print("The first name is {}".format(names[0]))
+>>> The first name is mini
+
+# 获取最后一个元素（长度减一作为下标）
+print("The last name is {}".format(names[len(names) - 1]))
+>>> The last name is lili
+```
+
 # list
 # 字典
 # 函数
