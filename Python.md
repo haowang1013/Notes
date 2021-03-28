@@ -252,6 +252,14 @@ scores[1] = 129
 print(scores)
 >>> [70, 129, 90, 30]
 ```
+
+- 测试是否包含某个元素
+```
+scores = [70, 100, 90, 30]
+if 40 in scores:
+  print("40 is in the scores!")
+```
+
 - 排序和反转
 ```
 # 反转
@@ -267,4 +275,86 @@ print(scores)
 ```
 
 # 字典
+建立从key到value的映射, 可以从key找到value, 但是无法从value找到key.
+
+字典变量名尽量使用key_to_value的形式.
+
+- 初始化
+```
+# 建立一个空字典
+name_to_score = {}
+
+# 建立一个非空字典
+name_to_score = { "mimi": 100, "didi": 200, "lili": 300 }
+
+# 获取长度
+num_scores = len(name_to_score)
+print(num_scores)
+>>> 3
+```
+
+- 添加元素
+```
+name_to_score = {}
+name_to_score["mini"] = 100
+print(name_to_score)
+>>> {"mini": 100}
+
+name_to_score["didi"] = 200
+print(name_to_score)
+>>> {"mini": 100, "didi": 200}
+```
+
+- 更新value
+```
+name_to_score = { "mimi": 100}
+print(name_to_score)
+>>> {"mini": 100}
+
+name_to_score["mimi"] = 200
+print(name_to_score)
+>>> {"mini": 200}
+```
+
+- 查找value
+```
+name_to_score = { "mimi": 100, "didi": 200, "lili": 300 }
+
+name = "coco"
+if name in name_to_score:
+  score = name_to_score[name]
+  print("I have a score for {}: {}".format(name, score))
+else:
+  print("There's no score for {}".format(name))
+```
+
+- 遍历
+```
+# 依次遍历key, value
+name_to_score = { "mimi": 100, "didi": 200, "lili": 300 }
+for name, score in name_to_score.items():
+  print("key is {}, value is {}")
+>>> key is mini, value is 100
+>>> key is didi, value is 200
+>>> key is lili, value is 300
+
+# 获得所有的key, 并转成list
+names = list(name_to_score.keys())
+print(names)
+>>> ["mini", "didi", "lili"]
+
+# 获得所有的value, 并转成list
+scores = list(name_to_score.values())
+print(scores)
+>>> [100, 200, 300]
+```
+
+- 删除元素
+```
+name_to_score = { "mimi": 100, "didi": 200, "lili": 300 }
+del name_to_score["mini"]
+print(name_to_score)
+>>> { "didi": 200, "lili": 300 }
+```
+
 # 函数
