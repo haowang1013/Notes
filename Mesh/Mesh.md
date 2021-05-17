@@ -7,3 +7,6 @@
 # Mesh Test App:
 - Tenent Id: `1b29195b-3b33-483a-8ba0-e85ac7455e32`
 - Client Id: `6231c437-d9af-4fcc-bdd2-cc19e6975122`
+
+# Others:
+- MS Client Id: `1c852e4d-dc14-4d14-ad12-983fa3fcd16f`
