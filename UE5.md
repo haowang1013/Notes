@@ -14,4 +14,9 @@
 
 - [UE5 Nanite实现浅析](https://zhuanlan.zhihu.com/p/376267968)
 
+## References 2
+
+- [The Broker Queue: A Fast, Linearizable FIFO Queue for
+Fine-Granular Work Distribution on the GPU](https://www.markussteinberger.net/papers/BrokerQueue.pdf)
+
 # Lumin
