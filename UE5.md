@@ -14,6 +14,8 @@
 
 - [UE5 Nanite实现浅析](https://zhuanlan.zhihu.com/p/376267968)
 
+- https://docs.unrealengine.com/5.0/en-US/RenderingFeatures/Nanite/
+
 ## References 2
 
 - [The Broker Queue: A Fast, Linearizable FIFO Queue for
