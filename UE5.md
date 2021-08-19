@@ -16,6 +16,8 @@
 
 - https://docs.unrealengine.com/5.0/en-US/RenderingFeatures/Nanite/
 
+- [A Trip Through The Graphics Pipeline](https://alaingalvan.gitbook.io/a-trip-through-the-graphics-pipeline/)
+
 ## References 2
 
 - [The Broker Queue: A Fast, Linearizable FIFO Queue for
