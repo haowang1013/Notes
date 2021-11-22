@@ -7,9 +7,13 @@
 
 - ledger 1: [0x94E5255Ee36EBd0b5822ad53da5cE80C496CFEDA](https://etherscan.io/address/0x94E5255Ee36EBd0b5822ad53da5cE80C496CFEDA)
 
+- solana (ledger): [HuvJK66hPme9jjyEYnKPDcQ53SPGE3acustTk1nyXFsQ](https://explorer.solana.com/address/HuvJK66hPme9jjyEYnKPDcQ53SPGE3acustTk1nyXFsQ)
+
+- ecash (trezor): [ecash:qr6yqmqq808lfzy4gutyq6d4k3l3u3s8n532u50k0c](https://ecashexplorer.com/address/ecash:qr6yqmqq808lfzy4gutyq6d4k3l3u3s8n532u50k0c)
+
 # Contracts
 
-- counter - rinkeby: [0x247E4B63535313B639cf60Df5a76cF50C8Be4ffD](https://rinkeby.etherscan.io/address/0x247E4B63535313B639cf60Df5a76cF50C8Be4ffD)
+- Counter - rinkeby: [0x247E4B63535313B639cf60Df5a76cF50C8Be4ffD](https://rinkeby.etherscan.io/address/0x247E4B63535313B639cf60Df5a76cF50C8Be4ffD)
 
 - ChadNFT - rinkeby: [0x4c7D3d713a32a5E13236faE91f565243006108E4](https://rinkeby.etherscan.io/address/0x4c7D3d713a32a5E13236faE91f565243006108E4)
 
