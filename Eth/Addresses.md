@@ -17,6 +17,8 @@
 
 - ChadNFT - rinkeby: [0x4c7D3d713a32a5E13236faE91f565243006108E4](https://rinkeby.etherscan.io/address/0x4c7D3d713a32a5E13236faE91f565243006108E4)
 
+- ChadCoin - rinkeby: [0xD3a677171D73d1Bf544d7481633062087F4FBDd4](https://rinkeby.etherscan.io/address/0xD3a677171D73d1Bf544d7481633062087F4FBDd4)
+
 # AC
 - safe mainnet: [0x0E4bBCe01Df387E53b01B85910126999E1cF54Fa](https://gnosis-safe.io/app/eth:0x0E4bBCe01Df387E53b01B85910126999E1cF54Fa)
 
