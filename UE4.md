@@ -183,7 +183,7 @@ r.ShaderPipelineCache.SaveBoundPSOLog=1
 
 ```
 Intermediate
-  PSOCaching
+  PSO
     <PLATFORM>
       CollectedPSOs
       	*.rec.upipelinecache
